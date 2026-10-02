@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AURA LUXE | Precision Engineered Lifestyle Essentials</title>
+  <meta name="description" content="Discover premium audio, minimalist workspace gear, and luxury EDC essentials crafted with surgical precision. Free global shipping available.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Canvas for celebration confetti -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Top Announcement Bar -->
+  <div class="announcement-bar">
+    <div class="container announcement-content">
+      <span class="announcement-badge">LIMITED DROP</span>
+      <p class="announcement-text">Complimentary worldwide express shipping on orders over $150 &bull; Use code <span class="promo-pill" onclick="copyPromo('AURA20')">AURA20</span> for 20% off</p>
+      <div class="announcement-actions">
+        <a href="#support" class="top-link">Support</a>
+        <span class="divider">|</span>
+        <span class="currency-tag">USD ($)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="site-header" id="site-header">
+    <div class="container header-container">
+      <div class="header-left">
+        <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <a href="#" class="brand-logo">
+          <span class="logo-mark">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </span>
+          <span class="logo-text">AURA<span class="logo-highlight">LUXE</span></span>
+        </a>
+      </div>
+
+      <!-- Desktop Nav Links -->
+      <nav class="desktop-nav" id="desktop-nav">
+        <a href="#featured" class="nav-link active">Store</a>
+        <a href="#categories" class="nav-link">Categories</a>
+        <a href="#collections" class="nav-link">Collections</a>
+        <a href="#reviews" class="nav-link">Reviews</a>
+        <a href="#about" class="nav-link">Craftsmanship</a>
+      </nav>
+
+      <!-- Action icons & Theme switch -->
+      <div class="header-actions">
+        <!-- Search Trigger / Bar -->
+        <div class="search-wrapper">
+          <input type="text" id="catalog-search" class="search-input" placeholder="Search gear, audio, tech..." aria-label="Search catalog">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <button id="clear-search-btn" class="clear-search-btn hidden" aria-label="Clear search">&times;</button>
+        </div>
+
+        <!-- Theme Toggle -->
+        <button id="theme-toggle-btn" class="icon-action-btn" title="Toggle Light / Dark Mode" aria-label="Toggle theme">
+          <svg id="theme-moon-icon" class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg id="theme-sun-icon" class="theme-icon hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+
+        <!-- Wishlist Button -->
+        <button id="wishlist-btn" class="icon-action-btn" title="Saved Wishlist" aria-label="Open wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+          <span class="badge" id="wishlist-count">0</span>
+        </button>
+
+        <!-- Cart Button -->
+        <button id="cart-btn" class="cart-action-btn" aria-label="Open shopping cart">
+          <div class="cart-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span class="badge" id="cart-count">0</span>
+          </div>
+          <span class="cart-total-pill" id="cart-header-total">$0.00</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-drawer-overlay" id="mobile-nav-overlay"></div>
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+    <div class="drawer-header">
+      <span class="drawer-title">Navigation</span>
+      <button class="drawer-close" id="mobile-nav-close">&times;</button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="#featured" class="mobile-link">Store Catalog</a>
+      <a href="#categories" class="mobile-link">Categories</a>
+      <a href="#collections" class="mobile-link">Curated Collections</a>
+      <a href="#reviews" class="mobile-link">Customer Reviews</a>
+      <a href="#about" class="mobile-link">Our Craftsmanship</a>
+    </div>
+    <div class="mobile-drawer-footer">
+      <div class="promo-box">
+        <span class="promo-label">SPECIAL OFFER</span>
+        <p>Use code <strong>AURA20</strong> for 20% off your entire order today.</p>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container hero-container">
+        <div class="hero-content">
+          <div class="hero-tag">
+            <span class="tag-dot"></span>
+            <span>NEXT-GEN AUDIO & WEARABLES 2026</span>
+          </div>
+          <h1 class="hero-title">
+            Engineered for <span class="gradient-text">Absolute Perfection</span> & Timeless Form
+          </h1>
+          <p class="hero-description">
+            Experience the harmony of aerospace-grade materials, acoustic mastery, and minimalist aesthetics. Elevate your everyday carry with instruments crafted to inspire.
+          </p>
+          <div class="hero-actions">
+            <a href="#catalog-section" class="btn btn-primary btn-lg pulse-glow">
+              Explore The Catalog
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+            <button class="btn btn-secondary btn-lg" onclick="quickViewProduct('h1')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+              Quick Preview
+            </button>
+          </div>
+          
+          <div class="hero-metrics">
+            <div class="metric-item">
+              <span class="metric-val">4.9 / 5</span>
+              <span class="metric-lbl">Over 12,400+ Reviews</span>
+            </div>
+            <div class="metric-separator"></div>
+            <div class="metric-item">
+              <span class="metric-val">100%</span>
+              <span class="metric-lbl">Carbon Neutral Craft</span>
+            </div>
+            <div class="metric-separator"></div>
+            <div class="metric-item">
+              <span class="metric-val">2-Year</span>
+              <span class="metric-lbl">Worldwide Warranty</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-image-card">
+            <img src="assets/hero-banner.jpg" alt="AURA Flagship Collection with Over-Ear Headphones, Smartwatch and Accessories" class="hero-img" loading="eager">
+            <div class="hero-badge hero-badge-top">
+              <div class="badge-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </div>
+              <div>
+                <strong>Award Winner</strong>
+                <span>Red Dot Design 2026</span>
+              </div>
+            </div>
+            <div class="hero-badge hero-badge-bottom">
+              <div class="badge-live-pulse"></div>
+              <div>
+                <strong>Spatial Audio Pro</strong>
+                <span>48h Ultra Playtime</span>
+              </div>
+              <button class="btn-micro" onclick="addToCart('h1')">Add $349</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Value Propositions Banner -->
+    <section class="features-bar">
+      <div class="container features-grid">
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+          </div>
+          <div class="feature-text">
+            <strong>Complimentary Worldwide Shipping</strong>
+            <span>Free express on orders over $150</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <div class="feature-text">
+            <strong>2-Year Global Warranty</strong>
+            <span>Complimentary coverage on all electronics</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+          </div>
+          <div class="feature-text">
+            <strong>30-Day Risk-Free Trial</strong>
+            <span>Love your product or full refund guaranteed</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+          </div>
+          <div class="feature-text">
+            <strong>24/7 Concierge Support</strong>
+            <span>Dedicated gear specialists ready to assist</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Catalog Section -->
+    <section class="catalog-section" id="catalog-section">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header">
+          <div>
+            <div class="sub-label">CURATED COLLECTION</div>
+            <h2 class="section-title">Designed for Everyday Mastery</h2>
+          </div>
+          <p class="section-subtitle">
+            Filter through our signature instruments, smart wearables, and workspace accessories.
+          </p>
+        </div>
+
+        <!-- Filter & Control Bar -->
+        <div class="filter-controls-card">
+          <!-- Category Tabs -->
+          <div class="category-pills" id="category-pills">
+            <button class="cat-pill active" data-category="all">All Items (<span id="cat-count-all">10</span>)</button>
+            <button class="cat-pill" data-category="audio">Audio & Sound</button>
+            <button class="cat-pill" data-category="wearables">Smart Wearables</button>
+            <button class="cat-pill" data-category="workspace">Workspace & Desk</button>
+            <button class="cat-pill" data-category="edc">Everyday Carry</button>
+          </div>
+
+          <!-- Secondary Filters: Price, Sort, View mode -->
+          <div class="sub-controls">
+            <!-- Price Range Filter -->
+            <div class="filter-group">
+              <label for="price-filter" class="filter-label">Max Price: <span id="price-val-label">$500</span></label>
+              <input type="range" id="price-filter" min="25" max="500" step="5" value="500" class="range-slider">
+            </div>
+
+            <!-- Sort By Select -->
+            <div class="filter-group">
+              <label for="sort-select" class="filter-label">Sort By:</label>
+              <div class="select-wrapper">
+                <select id="sort-select" class="custom-select">
+                  <option value="featured">Featured First</option>
+                  <option value="price-asc">Price: Low to High</option>
+                  <option value="price-desc">Price: High to Low</option>
+                  <option value="rating">Top Customer Rated</option>
+                  <option value="popular">Most Popular</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Active Results Counter -->
+            <div class="results-stats">
+              Showing <span id="showing-count" class="bold-text">10</span> items
+            </div>
+          </div>
+        </div>
+
+        <!-- Catalog Grid -->
+        <div class="product-grid" id="product-grid">
+          <!-- Dynamically populated via app.js -->
+        </div>
+
+        <!-- Empty State (When search/filters return 0) -->
+        <div class="empty-state hidden" id="empty-state">
+          <div class="empty-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+          </div>
+          <h3>No matching items found</h3>
+          <p>Try clearing your search terms or expanding your price filter range.</p>
+          <button class="btn btn-secondary" onclick="resetAllFilters()">Reset All Filters</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Curated Spotlight Banner / Story -->
+    <section class="spotlight-section" id="collections">
+      <div class="container">
+        <div class="spotlight-card">
+          <div class="spotlight-content">
+            <span class="spotlight-pill">FLAGSHIP SPOTLIGHT</span>
+            <h2 class="spotlight-title">AURA Apex Titanium Watch</h2>
+            <p class="spotlight-desc">
+              Forged from Grade 5 titanium with a scratch-resistant sapphire crystal touch surface. Equipped with ECG monitoring, 100m water resistance, and up to 14 days of battery life on a single charge.
+            </p>
+            <div class="spotlight-specs">
+              <div class="spec-cell">
+                <span class="spec-number">Grade 5</span>
+                <span class="spec-label">Solid Titanium</span>
+              </div>
+              <div class="spec-cell">
+                <span class="spec-number">14 Days</span>
+                <span class="spec-label">Battery Capacity</span>
+              </div>
+              <div class="spec-cell">
+                <span class="spec-number">100m</span>
+                <span class="spec-label">Water Resistance</span>
+              </div>
+            </div>
+            <div class="spotlight-cta">
+              <button class="btn btn-primary btn-lg" onclick="addToCart('w1')">
+                Pre-Order Apex &bull; $399
+              </button>
+              <button class="btn btn-outline btn-lg" onclick="quickViewProduct('w1')">
+                Technical Specs
+              </button>
+            </div>
+          </div>
+          <div class="spotlight-visual">
+            <img src="assets/smartwatch.jpg" alt="AURA Apex Titanium Watch Close-Up" class="spotlight-img" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Verified Customer Reviews Section -->
+    <section class="reviews-section" id="reviews">
+      <div class="container">
+        <div class="section-header center">
+          <div class="sub-label">TRUSTED BY 12,000+ AUDIOPHILES & DESIGNERS</div>
+          <h2 class="section-title">What Our Community Says</h2>
+          <div class="rating-summary-row">
+            <div class="stars-gold">★★★★★</div>
+            <span class="rating-text">4.92 / 5.0 Average Rating Across All Products</span>
+          </div>
+        </div>
+
+        <div class="reviews-grid">
+          <div class="review-card">
+            <div class="review-top">
+              <div class="review-stars">★★★★★</div>
+              <span class="verified-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Verified Buyer
+              </span>
+            </div>
+            <p class="review-quote">
+              "The Spatial Pro headphones completely blew away my expectations. The noise cancellation creates an absolute bubble of pure silence on flights, and the matte dark build feels like jewelry."
+            </p>
+            <div class="reviewer-meta">
+              <div class="reviewer-avatar">MK</div>
+              <div>
+                <strong>Marcus Vance</strong>
+                <span>Sound Architect, Berlin &bull; Purchased Spatial Pro</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-top">
+              <div class="review-stars">★★★★★</div>
+              <span class="verified-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Verified Buyer
+              </span>
+            </div>
+            <p class="review-quote">
+              "The Apex Watch is the first smartwatch that actually looks like a luxury Swiss timepiece. Battery lasts over 12 days effortlessly, and the haptic feedback is crisp and satisfying."
+            </p>
+            <div class="reviewer-meta">
+              <div class="reviewer-avatar">SL</div>
+              <div>
+                <strong>Sophia Laurent</strong>
+                <span>Creative Director, NYC &bull; Purchased Apex Titanium</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-top">
+              <div class="review-stars">★★★★★</div>
+              <span class="verified-badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Verified Buyer
+              </span>
+            </div>
+            <p class="review-quote">
+              "Shipping was insanely fast to Tokyo—arrived in 2 business days. The packaging alone is an unboxing experience on par with Apple. Will definitely order the desk lamp next."
+            </p>
+            <div class="reviewer-meta">
+              <div class="reviewer-avatar">KT</div>
+              <div>
+                <strong>Kenji Takahashi</strong>
+                <span>Industrial Designer, Tokyo &bull; Purchased Stealth Keyboard</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIP Club / Newsletter Section -->
+    <section class="newsletter-section">
+      <div class="container newsletter-box">
+        <div class="newsletter-glow"></div>
+        <div class="newsletter-inner">
+          <span class="vip-pill">VIP PRIVILEGE ACCESS</span>
+          <h2 class="newsletter-title">Join The AURA Collective</h2>
+          <p class="newsletter-subtitle">
+            Unlock exclusive limited-edition production runs, member-only pricing, and 15% off your first checkout.
+          </p>
+          <form class="newsletter-form" id="newsletter-form" onsubmit="handleNewsletter(event)">
+            <input type="email" id="newsletter-email" class="newsletter-input" placeholder="Enter your best email address..." required>
+            <button type="submit" class="btn btn-primary newsletter-btn">
+              Claim 15% Pass
+            </button>
+          </form>
+          <span class="spam-disclaimer">Zero spam. Unsubscribe anytime with one click.</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" id="about">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-col">
+          <a href="#" class="brand-logo footer-logo">
+            <span class="logo-mark">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+            </span>
+            <span class="logo-text">AURA<span class="logo-highlight">LUXE</span></span>
+          </a>
+          <p class="footer-bio">
+            Pioneering the intersection of industrial acoustics, titanium architecture, and sensory ergonomics.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-btn" aria-label="Twitter">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="GitHub">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#featured">Audio Equipment</a></li>
+            <li><a href="#featured">Titanium Watches</a></li>
+            <li><a href="#featured">Mechanical Keyboards</a></li>
+            <li><a href="#featured">Workspace Lighting</a></li>
+            <li><a href="#featured">Everyday Carry</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Assistance</h4>
+          <ul>
+            <li><a href="#support" onclick="showSupportModal()">Order Tracking</a></li>
+            <li><a href="#support" onclick="showSupportModal()">Worldwide Shipping</a></li>
+            <li><a href="#support" onclick="showSupportModal()">Returns & Exchanges</a></li>
+            <li><a href="#support" onclick="showSupportModal()">Warranty & Claims</a></li>
+            <li><a href="#support" onclick="showSupportModal()">Contact Concierge</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Store Codes</h4>
+          <div class="codes-list">
+            <div class="code-item" onclick="copyPromo('AURA20')">
+              <strong>AURA20</strong> &bull; 20% off all items
+            </div>
+            <div class="code-item" onclick="copyPromo('FREESHIP')">
+              <strong>FREESHIP</strong> &bull; Free express delivery
+            </div>
+            <div class="code-item" onclick="copyPromo('VIP50')">
+              <strong>VIP50</strong> &bull; $50 off orders over $250
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 AURA LUXE INC. All rights reserved. Precision Engineered.</p>
+        <div class="payment-methods">
+          <span class="pay-chip">Apple Pay</span>
+          <span class="pay-chip">Google Pay</span>
+          <span class="pay-chip">Visa</span>
+          <span class="pay-chip">Mastercard</span>
+          <span class="pay-chip">Amex</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Slide-Out Cart Drawer -->
+  <div class="drawer-backdrop" id="cart-backdrop"></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-labelledby="cart-heading">
+    <div class="cart-drawer-header">
+      <div class="cart-title-row">
+        <h3 id="cart-heading">Your Cart (<span id="cart-total-qty">0</span>)</h3>
+        <button class="cart-close-btn" id="cart-close-btn" aria-label="Close cart">&times;</button>
+      </div>
+
+      <!-- Free shipping progress bar -->
+      <div class="shipping-progress-container">
+        <div class="shipping-text-row">
+          <span id="shipping-progress-text">Add $150.00 more for Free Worldwide Express Delivery</span>
+          <span id="shipping-percent">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-bar" id="shipping-progress-bar" style="width: 0%;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cart items list -->
+    <div class="cart-drawer-body" id="cart-items-container">
+      <!-- Populated via app.js -->
+    </div>
+
+    <!-- Cart drawer footer -->
+    <div class="cart-drawer-footer">
+      <!-- Promo code field -->
+      <div class="promo-input-group">
+        <input type="text" id="promo-code-input" placeholder="Promo code (try AURA20)" aria-label="Discount code">
+        <button class="btn btn-secondary promo-apply-btn" onclick="applyCoupon()">Apply</button>
+      </div>
+      <div id="applied-discount-row" class="applied-discount-tag hidden">
+        <span>Discount: <strong id="applied-discount-label">AURA20 (-20%)</strong></span>
+        <button class="remove-coupon-btn" onclick="removeCoupon()" title="Remove coupon">&times;</button>
+      </div>
+
+      <!-- Pricing Summary -->
+      <div class="cart-summary-breakdown">
+        <div class="summary-line">
+          <span>Subtotal</span>
+          <span id="cart-subtotal">$0.00</span>
+        </div>
+        <div class="summary-line discount-line hidden" id="discount-summary-line">
+          <span>Discount</span>
+          <span id="cart-discount">-$0.00</span>
+        </div>
+        <div class="summary-line">
+          <span>Shipping</span>
+          <span id="cart-shipping">$0.00</span>
+        </div>
+        <div class="summary-line">
+          <span>Estimated Tax (8%)</span>
+          <span id="cart-tax">$0.00</span>
+        </div>
+        <div class="summary-line total-line">
+          <span>Total</span>
+          <span id="cart-grand-total">$0.00</span>
+        </div>
+      </div>
+
+      <!-- Checkout CTA -->
+      <button class="btn btn-primary btn-block checkout-btn" id="proceed-checkout-btn" onclick="openCheckoutModal()">
+        Proceed to Checkout &bull; <span id="checkout-btn-total">$0.00</span>
+      </button>
+
+      <div class="cart-security-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        <span>256-Bit Bank Level Encryption &bull; 30-Day Money Back</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Wishlist Drawer -->
+  <div class="drawer-backdrop" id="wishlist-backdrop"></div>
+  <aside class="cart-drawer wishlist-drawer" id="wishlist-drawer">
+    <div class="cart-drawer-header">
+      <div class="cart-title-row">
+        <h3>Saved Wishlist (<span id="wishlist-drawer-count">0</span>)</h3>
+        <button class="cart-close-btn" id="wishlist-close-btn">&times;</button>
+      </div>
+    </div>
+    <div class="cart-drawer-body" id="wishlist-items-container">
+      <!-- Populated via app.js -->
+    </div>
+  </aside>
+
+  <!-- Quick View Product Modal -->
+  <div class="modal-backdrop" id="quickview-backdrop"></div>
+  <div class="quickview-modal" id="quickview-modal" role="dialog" aria-modal="true">
+    <button class="modal-close-btn" id="quickview-close-btn">&times;</button>
+    <div class="quickview-inner" id="quickview-content">
+      <!-- Rendered dynamically -->
+    </div>
+  </div>
+
+  <!-- Interactive Simulated Checkout Modal -->
+  <div class="modal-backdrop" id="checkout-backdrop"></div>
+  <div class="checkout-modal" id="checkout-modal" role="dialog" aria-modal="true">
+    <button class="modal-close-btn" id="checkout-close-btn">&times;</button>
+
+    <div class="checkout-container" id="checkout-step-container">
+      <!-- Step 1 & 2 Form -->
+      <div class="checkout-form-side" id="checkout-form-view">
+        <div class="checkout-header">
+          <div class="brand-logo modal-logo">
+            <span class="logo-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></span>
+            <span class="logo-text">AURA<span class="logo-highlight">CHECKOUT</span></span>
+          </div>
+          <span class="checkout-step-pill">Express Secure Pay</span>
+        </div>
+
+        <!-- Fast 1-Click Pay Buttons -->
+        <div class="express-pay-methods">
+          <button type="button" class="express-btn apple-pay" onclick="autoFillCheckout('apple')">
+            <span>Apple Pay</span>
+          </button>
+          <button type="button" class="express-btn g-pay" onclick="autoFillCheckout('google')">
+            <span>Google Pay</span>
+          </button>
+        </div>
+
+        <div class="checkout-divider">
+          <span>OR CONTINUE WITH CARD</span>
+        </div>
+
+        <form id="checkout-form" onsubmit="handlePlaceOrder(event)">
+          <div class="form-section-title">Shipping Details</div>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="ship-name">Full Name</label>
+              <input type="text" id="ship-name" required placeholder="Alex Mercer" value="Alex Mercer">
+            </div>
+            <div class="form-field">
+              <label for="ship-email">Email Address</label>
+              <input type="email" id="ship-email" required placeholder="alex@auradesign.com" value="alex@auradesign.com">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field full-width">
+              <label for="ship-address">Street Address</label>
+              <input type="text" id="ship-address" required placeholder="742 Evergreen Terrace" value="482 Titanium Blvd, Suite 400">
+            </div>
+          </div>
+
+          <div class="form-row three-col">
+            <div class="form-field">
+              <label for="ship-city">City</label>
+              <input type="text" id="ship-city" required placeholder="San Francisco" value="San Francisco">
+            </div>
+            <div class="form-field">
+              <label for="ship-state">State / Prov</label>
+              <input type="text" id="ship-state" required placeholder="CA" value="CA">
+            </div>
+            <div class="form-field">
+              <label for="ship-zip">Postal Code</label>
+              <input type="text" id="ship-zip" required placeholder="94107" value="94107">
+            </div>
+          </div>
+
+          <div class="form-section-title">Payment Method</div>
+          <div class="form-row">
+            <div class="form-field full-width">
+              <label for="card-num">Card Number</label>
+              <div class="card-input-wrapper">
+                <input type="text" id="card-num" required placeholder="•••• •••• •••• 4242" value="4242 4242 4242 4242" maxlength="19">
+                <span class="card-brand-badge">VISA</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="card-exp">Expiry (MM/YY)</label>
+              <input type="text" id="card-exp" required placeholder="12/28" value="12/28" maxlength="5">
+            </div>
+            <div class="form-field">
+              <label for="card-cvc">CVC / CVV</label>
+              <input type="password" id="card-cvc" required placeholder="888" value="888" maxlength="4">
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block place-order-btn" id="pay-submit-btn">
+            <span class="btn-text">Authorize & Place Order &bull; <span id="modal-pay-total">$0.00</span></span>
+            <div class="spinner hidden" id="pay-spinner"></div>
+          </button>
+        </form>
+      </div>
+
+      <!-- Checkout Order Summary Side -->
+      <div class="checkout-summary-side">
+        <h4 class="checkout-summary-title">Order Overview</h4>
+        <div class="checkout-items-preview" id="checkout-preview-list">
+          <!-- Mini preview list -->
+        </div>
+
+        <div class="checkout-cost-table">
+          <div class="cost-row">
+            <span>Subtotal</span>
+            <span id="co-subtotal">$0.00</span>
+          </div>
+          <div class="cost-row hidden discount-color" id="co-discount-row">
+            <span>Discount</span>
+            <span id="co-discount">-$0.00</span>
+          </div>
+          <div class="cost-row">
+            <span>Express Shipping</span>
+            <span id="co-shipping">Free</span>
+          </div>
+          <div class="cost-row">
+            <span>Estimated Taxes</span>
+            <span id="co-tax">$0.00</span>
+          </div>
+          <div class="cost-row total-highlight">
+            <span>Due Today</span>
+            <span id="co-total">$0.00</span>
+          </div>
+        </div>
+
+        <div class="checkout-guarantee">
+          <div class="guarantee-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <div>
+            <strong>AURA White Glove Protection</strong>
+            <span>Insured air transit, tamper-evident packaging, and signature upon receipt.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: Success Screen (Rendered on order completed) -->
+    <div class="checkout-success-view hidden" id="checkout-success-view">
+      <div class="success-icon-wrap">
+        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <span class="success-subtitle">PAYMENT VERIFIED & AUTHORIZED</span>
+      <h2 class="success-title">Thank You, <span id="success-customer-name">Alex</span>!</h2>
+      <p class="success-message">
+        Your order <strong id="success-order-id">#AURA-89412</strong> has been confirmed. Our Zurich fulfillment facility has received your specifications and is preparing your shipment.
+      </p>
+
+      <div class="order-receipt-card">
+        <div class="receipt-row">
+          <span>Estimated Delivery:</span>
+          <strong id="success-delivery-date">Tuesday, Oct 06</strong>
+        </div>
+        <div class="receipt-row">
+          <span>Delivery Method:</span>
+          <strong>AURA Express Carbon-Free Courier</strong>
+        </div>
+        <div class="receipt-row">
+          <span>Amount Charged:</span>
+          <strong id="success-total-charged" class="accent-price">$0.00</strong>
+        </div>
+      </div>
+
+      <div class="success-actions">
+        <button class="btn btn-primary" onclick="closeCheckoutAndReset()">Continue Shopping</button>
+        <button class="btn btn-secondary" onclick="printReceipt()">Print Receipt</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

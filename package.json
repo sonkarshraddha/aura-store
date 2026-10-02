@@ -1,0 +1,13 @@
+{
+  "name": "aura-luxe-store",
+  "version": "1.0.0",
+  "description": "AURA LUXE — Precision Engineered Lifestyle & Audio E-Commerce Store",
+  "main": "index.html",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["ecommerce", "storefront", "luxury", "audio", "minimalist"],
+  "author": "",
+  "license": "MIT"
+}
